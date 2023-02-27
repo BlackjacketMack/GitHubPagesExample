@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 # Run workflow on every push to the live branch
 on:
   push:
-    branches: [ live ]
+    branches: [ main ]
 
 jobs:
   deploy-to-github-pages:
