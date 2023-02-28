@@ -2,7 +2,7 @@
 
 namespace GitHubPagesExample.Pages.Blog.Posts
 {
-    public class BlogPostPage : ComponentBase
+    public abstract class BlogPostPage : ComponentBase
     {
         public string PostTitle { get; set; }
 

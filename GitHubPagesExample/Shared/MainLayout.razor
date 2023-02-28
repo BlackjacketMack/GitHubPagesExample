@@ -1,37 +1,41 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider @bind-IsDarkMode="_isDarkMode" Theme="_theme"/>
-<MudDialogProvider/>
-<MudSnackbarProvider/>
+<CascadingValue Value="@this">
 
-<MudLayout>
-    <MudAppBar Elevation="1" Color="@_appBarColor">
-        <MudText Typo="Typo.h5" Class="ml-3">Application</MudText>
-        <MudSpacer />
-        <MudSwitch @bind-Checked="@_isDarkMode" Color="Color.Primary" Class="ma-4" T="bool" Label="Toggle Light/Dark Mode" />
-    </MudAppBar>
-    <MudMainContent>
-        <MudContainer Class="mt-16" MaxWidth="MaxWidth.Large">
-            <MudGrid>
-                <MudItem xs="12" sm="3">
-                    <NavMenu />
-                </MudItem>
-                <MudItem xs="12" sm="9">
-                    <div class="ma-6">
-                        @Body
-                    </div>
-                </MudItem>
-            </MudGrid>
-        </MudContainer>
-    </MudMainContent>
-</MudLayout>
+    <MudThemeProvider @bind-IsDarkMode="IsDarkMode" Theme="_theme"/>
+    <MudDialogProvider/>
+    <MudSnackbarProvider/>
+
+    <MudLayout>
+        <MudAppBar Elevation="1" Color="@AppBarColor">
+            <MudText Typo="Typo.h5" Class="ml-3">Application</MudText>
+            <MudSpacer />
+            <MudSwitch @bind-Checked="@IsDarkMode" Color="Color.Primary" Class="ma-4" T="bool" Label="Toggle Light/Dark Mode" />
+        </MudAppBar>
+        <MudMainContent>
+            <MudContainer Class="mt-16" MaxWidth="MaxWidth.Large">
+                <MudGrid>
+                    <MudItem xs="12" sm="3">
+                        <NavMenu />
+                    </MudItem>
+                    <MudItem xs="12" sm="9">
+                        <div class="ma-6">
+                            @Body
+                        </div>
+                    </MudItem>
+                </MudGrid>
+            </MudContainer>
+        </MudMainContent>
+    </MudLayout>
+</CascadingValue>
+
 
 @code {
     private MudTheme _theme = new();
 
-    private bool _isDarkMode;
+    public bool IsDarkMode;
 
-    private Color _appBarColor => _isDarkMode ? Color.Default : Color.Primary;
+    private Color AppBarColor => IsDarkMode ? Color.Default : Color.Primary;
 
     protected override void OnInitialized()
     {

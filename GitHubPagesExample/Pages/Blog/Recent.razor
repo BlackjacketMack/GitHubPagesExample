@@ -1,5 +1,6 @@
 ﻿@page "/blog/recent"
 @using GitHubPagesExample.Pages.Blog.Posts;
+@using GitHubPagesExample.Services;
 
 <PageTitle>Recent Posts</PageTitle>
 
@@ -10,8 +11,8 @@ Blog home
     @foreach(var recentPost in _blogPostPages)
     {
         <div>Hello - @recentPost.PostTitle
-        
-        <br />@recentPost.GetType()
+            <br />
+            @recentPost.GetType()
         </div>
     }
 </div>

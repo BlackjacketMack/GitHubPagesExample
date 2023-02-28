@@ -1,5 +1,10 @@
 ﻿@page "/theme"
 
+<div class="mt-16">
+    <MudSwitch Color="Color.Primary" @bind-Checked="MainLayout.IsDarkMode" Class="ma-4" T="bool" Label="Toggle Light/Dark Mode" />
+</div>
+
+
 <div class="docs-page-section">
     <!--!--><h4 class="mud-typography mud-typography-h4 py-4">Default Colors</h4><!--!-->
     <!--!--><!--!--><div class="mud-grid mud-grid-spacing-xs-3 justify-start">
@@ -88,11 +93,15 @@
     </div>
 </div>
 
-@code {
-    private int currentCount = 0;
 
-    private void IncrementCount()
+@code {
+
+    [CascadingParameter]
+    public MainLayout? MainLayout{ get; set; }
+
+    private void checkedChanged()
     {
-        currentCount++;
+        MainLayout.IsDarkMode = true;
+        StateHasChanged();
     }
 }
