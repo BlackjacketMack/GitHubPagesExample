@@ -6,26 +6,26 @@
 
 <MudLayout>
     <MudAppBar Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudText Typo="Typo.h5" Class="ml-3">Application</MudText>
         <MudSpacer />
         <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
     </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-        <NavMenu />
-    </MudDrawer>
     <MudMainContent>
-        <div class="ma-6">
-            @Body
-        </div>
+        <MudContainer Class="mt-16" MaxWidth="MaxWidth.Large">
+            <MudGrid Class="mt-8">
+                <MudItem xs="12" sm="3">
+                    <NavMenu />
+                </MudItem>
+                <MudItem xs="12" sm="9">
+                    <div class="ma-6">
+                        @Body
+                    </div>
+                </MudItem>
+            </MudGrid>
+        </MudContainer>
     </MudMainContent>
 </MudLayout>
 
 @code {
-    bool _drawerOpen = true;
-
-    void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
+    
 }
