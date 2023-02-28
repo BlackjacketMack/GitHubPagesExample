@@ -1,9 +1,16 @@
 ﻿@inherits LayoutComponentBase
 @layout MainLayout
 
-<div>Posts</div>
-
-@Body
+<MudGrid>
+    <MudItem xs="12" sm="3">
+        <_BlogMenu />
+    </MudItem>
+    <MudItem xs="12" sm="9">
+        <div class="ma-6">
+        @Body
+        </div>
+    </MudItem>
+</MudGrid>
 
 @code {
     bool _drawerOpen = true;

@@ -16,23 +16,18 @@
             <MudMenuItem>
                 <MudLink Href="theme">Theme</MudLink>
             </MudMenuItem>
-            <MudMenuItem>My account</MudMenuItem>
-            <MudMenuItem>Logout</MudMenuItem>
+            <MudMenuItem>
+                <MudLink Href="fetchdata">Fetch Data</MudLink>
+            </MudMenuItem>
+            <MudMenuItem>
+                <MudLink Href="counter">Counter</MudLink>
+            </MudMenuItem>
         </MudMenu>
 
     </MudAppBar>
     <MudMainContent>
-        <MudContainer Class="mt-16" MaxWidth="MaxWidth.Large">
-            <MudGrid>
-                <MudItem xs="12" sm="3">
-                    <NavMenu />
-                </MudItem>
-                <MudItem xs="12" sm="9">
-                    <div class="ma-6">
-                        @Body
-                    </div>
-                </MudItem>
-            </MudGrid>
+        <MudContainer Class="mt-8" MaxWidth="MaxWidth.Large">
+            @Body
         </MudContainer>
     </MudMainContent>
 </MudLayout>
