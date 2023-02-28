@@ -1,50 +1,54 @@
 ﻿@inherits LayoutComponentBase
+@inject AppState _appState;
+@implements IDisposable;
 
-<CascadingValue Value="@this">
+<MudThemeProvider @bind-IsDarkMode="_appState.IsDarkMode" Theme="_theme"/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 
-    <MudThemeProvider @bind-IsDarkMode="IsDarkMode" Theme="_theme"/>
-    <MudDialogProvider/>
-    <MudSnackbarProvider/>
+<MudLayout>
+    <MudAppBar Elevation="1" Color="@_appState.AppBarColor">
+        <MudText Typo="Typo.h5" Class="ml-3">Application</MudText>
+        <MudSpacer />
+        <MudMenu Icon="@Icons.Material.Filled.Settings">
+            <MudMenuItem>
+                <MudLink Href="Theme">Theme</MudLink>
+            </MudMenuItem>
+            <MudMenuItem>My account</MudMenuItem>
+            <MudMenuItem>Logout</MudMenuItem>
+        </MudMenu>
 
-    <MudLayout>
-        <MudAppBar Elevation="1" Color="@AppBarColor">
-            <MudText Typo="Typo.h5" Class="ml-3">Application</MudText>
-            <MudSpacer />
-            <MudSwitch @bind-Checked="@IsDarkMode" Color="Color.Primary" Class="ma-4" T="bool" Label="Toggle Light/Dark Mode" />
-        </MudAppBar>
-        <MudMainContent>
-            <MudContainer Class="mt-16" MaxWidth="MaxWidth.Large">
-                <MudGrid>
-                    <MudItem xs="12" sm="3">
-                        <NavMenu />
-                    </MudItem>
-                    <MudItem xs="12" sm="9">
-                        <div class="ma-6">
-                            @Body
-                        </div>
-                    </MudItem>
-                </MudGrid>
-            </MudContainer>
-        </MudMainContent>
-    </MudLayout>
-</CascadingValue>
+    </MudAppBar>
+    <MudMainContent>
+        <MudContainer Class="mt-16" MaxWidth="MaxWidth.Large">
+            <MudGrid>
+                <MudItem xs="12" sm="3">
+                    <NavMenu />
+                </MudItem>
+                <MudItem xs="12" sm="9">
+                    <div class="ma-6">
+                        @Body
+                    </div>
+                </MudItem>
+            </MudGrid>
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
 
 
 @code {
     private MudTheme _theme = new();
 
-    public bool IsDarkMode;
-
-    private Color AppBarColor => IsDarkMode ? Color.Default : Color.Primary;
-
     protected override void OnInitialized()
     {
+        _appState.StateChanged += StateChanged;
+
         var primary = new MudBlazor.Utilities.MudColor("#607D8B");
         var secondary = new MudBlazor.Utilities.MudColor("#F44336");
         var tertiary = new MudBlazor.Utilities.MudColor("#009688");
         _theme = new MudTheme
             {
-                
+
                 Palette = new Palette
                 {
                     Primary = primary,
@@ -58,5 +62,15 @@
                     Tertiary = tertiary
                 }
             };
+    }
+
+    public void StateChanged()
+    {
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        
     }
 }

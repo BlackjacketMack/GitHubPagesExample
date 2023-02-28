@@ -1,7 +1,8 @@
 ﻿@page "/theme"
+@inject AppState _appState
 
 <div class="mt-16">
-    <MudSwitch Color="Color.Primary" @bind-Checked="MainLayout.IsDarkMode" Class="ma-4" T="bool" Label="Toggle Light/Dark Mode" />
+    <MudSwitch Color="Color.Primary" @bind-Checked="_appState.IsDarkMode" @bind-Checked:after="checkedChanged" Class="ma-4" T="bool" Label="Toggle Light/Dark Mode" />
 </div>
 
 
@@ -101,7 +102,6 @@
 
     private void checkedChanged()
     {
-        MainLayout.IsDarkMode = true;
-        StateHasChanged();
+        _appState.NotifyStateChanged();
     }
 }
