@@ -1,0 +1,27 @@
+﻿@page "/blog/recent"
+@using GitHubPagesExample.Pages.Blog.Posts;
+
+<PageTitle>Recent Posts</PageTitle>
+
+Blog home
+
+<div>
+    Recent Posts
+    @foreach(var recentPost in _blogPostPages)
+    {
+        <div>Hello - @recentPost.PostTitle
+        
+        <br />@recentPost.GetType()
+        </div>
+    }
+</div>
+
+@code 
+{
+    private IEnumerable<BlogPostPage> _blogPostPages = Enumerable.Empty<BlogPostPage>();
+
+    protected override void OnInitialized()
+    {
+        _blogPostPages = new BlogHelper().GetRecentPosts();
+    }
+}

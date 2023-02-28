@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace GitHubPagesExample.Pages.Blog
+namespace GitHubPagesExample.Pages.Blog.Posts
 {
     public class BlogPostPage : ComponentBase
     {
