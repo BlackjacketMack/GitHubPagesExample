@@ -1,18 +1,18 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider />
+<MudThemeProvider @bind-IsDarkMode="_isDarkMode" Theme="_theme"/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
 <MudLayout>
-    <MudAppBar Elevation="1">
+    <MudAppBar Elevation="1" Color="@_appBarColor">
         <MudText Typo="Typo.h5" Class="ml-3">Application</MudText>
         <MudSpacer />
-        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+        <MudSwitch @bind-Checked="@_isDarkMode" Color="Color.Primary" Class="ma-4" T="bool" Label="Toggle Light/Dark Mode" />
     </MudAppBar>
     <MudMainContent>
         <MudContainer Class="mt-16" MaxWidth="MaxWidth.Large">
-            <MudGrid Class="mt-8">
+            <MudGrid>
                 <MudItem xs="12" sm="3">
                     <NavMenu />
                 </MudItem>
@@ -27,5 +27,32 @@
 </MudLayout>
 
 @code {
-    
+    private MudTheme _theme = new();
+
+    private bool _isDarkMode;
+
+    private Color _appBarColor => _isDarkMode ? Color.Default : Color.Primary;
+
+    protected override void OnInitialized()
+    {
+        var primary = new MudBlazor.Utilities.MudColor("#607D8B");
+        var secondary = new MudBlazor.Utilities.MudColor("#F44336");
+        var tertiary = new MudBlazor.Utilities.MudColor("#009688");
+        _theme = new MudTheme
+            {
+                
+                Palette = new Palette
+                {
+                    Primary = primary,
+                    Secondary = secondary,
+                    Tertiary = tertiary
+                },
+                PaletteDark = new PaletteDark
+                {
+                    Primary = primary,
+                    Secondary = secondary,
+                    Tertiary = tertiary
+                }
+            };
+    }
 }
