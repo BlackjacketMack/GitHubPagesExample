@@ -9,7 +9,9 @@
 
 <MudLayout>
     <MudAppBar Elevation="1" Color="@_appState.AppBarColor">
-        <MudText Class="ml-3 logo-text">Rithm</MudText>
+        <MudLink Href="" Color="Color.Inherit">
+            <MudText Class="ml-3 logo-text">Rithm</MudText>
+        </MudLink>
         <MudSpacer />
         <MudButton StartIcon="@Icons.Material.Filled.Feed" Color="Color.Inherit" OnClick="@(()=>navigateTo("blog"))">Blog</MudButton>
         <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit">
@@ -23,7 +25,6 @@
                 <MudLink Href="counter">Counter</MudLink>
             </MudMenuItem>
         </MudMenu>
-
     </MudAppBar>
     <MudMainContent>
         <MudContainer Class="mt-8" MaxWidth="MaxWidth.Large">
