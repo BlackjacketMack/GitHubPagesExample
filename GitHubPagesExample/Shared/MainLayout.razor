@@ -1,18 +1,20 @@
 ﻿@inherits LayoutComponentBase
 @inject AppState _appState;
 @implements IDisposable;
+@inject NavigationManager _navigationManager
 
-<MudThemeProvider @bind-IsDarkMode="_appState.IsDarkMode" Theme="_theme"/>
+<MudThemeProvider @bind-IsDarkMode="_appState.IsDarkMode" Theme="_theme" />
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
 <MudLayout>
     <MudAppBar Elevation="1" Color="@_appState.AppBarColor">
-        <MudText Typo="Typo.h5" Class="ml-3">Application</MudText>
+        <MudText Class="ml-3 logo-text">Rithm</MudText>
         <MudSpacer />
-        <MudMenu Icon="@Icons.Material.Filled.Settings">
+        <MudButton StartIcon="@Icons.Material.Filled.Feed" Color="Color.Inherit" OnClick="@(()=>navigateTo("blog"))">Blog</MudButton>
+        <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit">
             <MudMenuItem>
-                <MudLink Href="Theme">Theme</MudLink>
+                <MudLink Href="theme">Theme</MudLink>
             </MudMenuItem>
             <MudMenuItem>My account</MudMenuItem>
             <MudMenuItem>Logout</MudMenuItem>
@@ -71,6 +73,8 @@
 
     public void Dispose()
     {
-        
+
     }
+
+    private void navigateTo(string url) => _navigationManager.NavigateTo(url);
 }
