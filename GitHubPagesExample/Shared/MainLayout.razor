@@ -46,7 +46,13 @@
         var tertiary = new MudBlazor.Utilities.MudColor("#009688");
         _theme = new MudTheme
             {
-
+                Typography = new Typography
+                {
+                  Default = new Default
+                  {
+                      FontSize = "1rem"
+                  }  
+                },
                 Palette = new Palette
                 {
                     Primary = primary,
