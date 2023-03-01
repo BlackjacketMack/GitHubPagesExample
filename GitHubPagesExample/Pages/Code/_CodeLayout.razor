@@ -1,0 +1,22 @@
+﻿@inherits LayoutComponentBase
+@layout MainLayout
+
+<MudGrid>
+    <MudItem xs="12" sm="3">
+        <_CodeMenu />
+    </MudItem>
+    <MudItem xs="12" sm="9">
+        <div class="ma-6">
+        @Body
+        </div>
+    </MudItem>
+</MudGrid>
+
+@code {
+    bool _drawerOpen = true;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
