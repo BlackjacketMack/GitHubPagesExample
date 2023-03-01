@@ -2,7 +2,13 @@
 
 namespace GitHubPagesExample.Services
 {
-    public class BlogHelper
+    interface IBlogHelper
+    {
+        IEnumerable<BlogPostPage> GetRecentPosts();
+        IEnumerable<BlogPostPage> GetAllPosts();
+    }
+
+    public class BlogHelper : IBlogHelper
     {
         public IEnumerable<BlogPostPage> GetRecentPosts()
         {
