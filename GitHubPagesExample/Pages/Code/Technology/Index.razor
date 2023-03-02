@@ -2,23 +2,25 @@
 
 <PageTitle>Technology</PageTitle>
 
-
-@{
-    var renderFragments = new List<RenderFragment>();
-    renderFragments.Add(@<TechnologyInfo Name="Dapper" Image="img/dapper-icon.png"  />);
-    renderFragments.Add(@<TechnologyInfo Name="FluentValidation" />);
-    renderFragments.Add(@<TechnologyInfo Name="MudBlazor" />);
-}
 <MudGrid xs="12" sm="6">
-    @foreach (var renderFragment in renderFragments)
+    @foreach (var techArticle in _technologyArticles)
     {
-    <MudItem xs="12" sm="6" md="4">
-        @renderFragment
-    </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <TechnologyInfo Name="@techArticle.Name" Image="@techArticle.Image" Icon="@techArticle.Icon"  />
+        </MudItem>
     }
 </MudGrid>
 
 @code{
 
-   
+    [Inject]
+    private IArticleHelper _articleHelper{ get; set; }
+
+    private IEnumerable<TechnologyArticle> _technologyArticles = Enumerable.Empty<TechnologyArticle>();
+
+    protected override void OnInitialized()
+    {
+        _technologyArticles = _articleHelper.GetTechnologyArticles();
+    }
+
 }

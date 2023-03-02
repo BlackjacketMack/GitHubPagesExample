@@ -10,7 +10,7 @@ Blog home
     Recent Posts
     @foreach(var recentPost in _blogPostPages)
     {
-        <div>Hello - @recentPost.PostTitle
+        <div>Hello - @recentPost.Name
             <br />
             @recentPost.GetType()
         </div>
@@ -19,10 +19,13 @@ Blog home
 
 @code 
 {
-    private IEnumerable<BlogPostPage> _blogPostPages = Enumerable.Empty<BlogPostPage>();
+    [Inject]
+    private IArticleHelper _articleHelper{ get; set; }
+
+    private IEnumerable<Article> _blogPostPages = Enumerable.Empty<Article>();
 
     protected override void OnInitialized()
     {
-        _blogPostPages = new BlogHelper().GetRecentPosts();
+        _blogPostPages = _articleHelper.GetRecentArticles();
     }
 }

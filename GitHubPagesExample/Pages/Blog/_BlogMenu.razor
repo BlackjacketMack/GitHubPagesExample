@@ -12,7 +12,7 @@
     <MudNavGroup Title="Posts" Expanded="false">
         @foreach(var post in _posts)
         {
-            <MudNavLink Href="@post.Permalink">@post.PostTitle</MudNavLink>
+            <MudNavLink Href="@post.Permalink">@post.Name</MudNavLink>
         }
     </MudNavGroup>
 </MudNavMenu>
@@ -20,12 +20,12 @@
 
 @code {
     [Inject]
-    private IBlogHelper _blogHelper { get; set; }
+    private IArticleHelper _articleHelper { get; set; }
 
-    private IEnumerable<BlogPostPage> _posts = Empty<BlogPostPage>();
+    private IEnumerable<BlogArticle> _posts = Empty<BlogArticle>();
 
     protected override void OnInitialized()
     {
-        _posts = _blogHelper.GetAllPosts();
+        _posts = _articleHelper.GetBlogArticles();
     }
 }
