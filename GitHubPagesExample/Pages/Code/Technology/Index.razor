@@ -6,7 +6,7 @@
     @foreach (var techArticle in _technologyArticles)
     {
         <MudItem xs="12" sm="6" md="4">
-            <TechCard Name="@techArticle.Name" Image="@techArticle.Image" Icon="@techArticle.Icon"  />
+            <TechCard Article="@techArticle"  />
         </MudItem>
     }
 </MudGrid>

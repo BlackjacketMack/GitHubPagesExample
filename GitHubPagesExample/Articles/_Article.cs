@@ -12,5 +12,7 @@ namespace GitHubPagesExample.Pages
         public string? Key { get; set; }
 
         public DateTime PostDate { get; set; }
+
+        public IList<string> Tags { get; set; } = new List<string>();
     }
 }

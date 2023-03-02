@@ -1,25 +1,27 @@
-﻿<PageTitle>@Name</PageTitle>
-
-
+﻿
 <MudCard>
     <MudCardHeader>
         <CardHeaderContent>
-            <MudText Typo="Typo.h6">@Name</MudText>
+            <MudText Typo="Typo.h6">@_name</MudText>
         </CardHeaderContent>
         <CardHeaderActions>
-            @if (Image != null)
+            @if (_image != null)
             {
-                <MudImage Src="@Image" Fluid="true" Width="50" />
+                <MudImage Src="@_image" Fluid="true" Width="50" />
             }
-            @if(Icon != null)
+            @if(_icon != null)
             {
-                <MudIcon Icon="@Icon" Size="Size.Medium" />
+                <MudIcon Icon="@_icon" Size="Size.Medium" />
             }
         </CardHeaderActions>
     </MudCardHeader>
     <MudCardContent>
         <MudText>This day everything happend.</MudText>
         <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>
+        @foreach(var tag in _tags)
+        {
+            <MudChip Label=true Size="Size.Small" Class="mx-0 mr-2" Variant="Variant.Text">@tag</MudChip>
+        }
     </MudCardContent>
     <MudCardActions>
         <MudButton Variant="Variant.Text" Color="Color.Primary">Read More</MudButton>
@@ -29,17 +31,21 @@
 @code
 {
     [Parameter]
-    public string? Name{ get; set; }
+    public TechnologyArticle Article{ get; set; } = default!;
 
-    [Parameter]
-    public string? Image { get; set; }
-
-    [Parameter]
-    public string? Icon { get; set; }
+    private string? _name;
+    private string? _image;
+    private string? _icon;
+    private IEnumerable<string> _tags = default!;
 
     protected override void OnInitialized()
     {
-        if (Image == null && Icon == null)
-            Icon = Icons.Custom.Brands.GitHub;
+        _name = Article.Name;
+        _image = Article.Image;
+        _icon = Article.Icon;
+        _tags = Article.Tags;
+
+        if (_image == null && _icon == null)
+            _icon = Icons.Custom.Brands.GitHub;
     }
 }
