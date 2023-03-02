@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "GitHubPagesExample.dll": "sha256-ohhTlE2n5JPRAu2Uqjirnc\/QEm6CyAvd4snisnl+8M4=",
+      "GitHubPagesExample.dll": "sha256-NByHeQ8E9NtaYtZ6Wdl5UYe96HVwlXKQyyb80bKp6Xc=",
       "Microsoft.AspNetCore.Components.dll": "sha256-\/M6y6Mq4gfoGtbccuFr1zEoPtZOHx0FFDMVBXaFihiU=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-LfC07\/O6PKWXvy\/F8OgLhQR+593PD4gW4h+Ywjovbv8=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-mTijt5A5xJzZAV5tK9ij9JB9J39lCjyHt8HNlVZKHGY=",
@@ -23,7 +23,7 @@
       "Microsoft.Extensions.Primitives.dll": "sha256-eXvGx2jcjpTPEJoAHBsW\/VuMPbNyyU+AsuhPmkzSSRY=",
       "Microsoft.JSInterop.dll": "sha256-9s5kgwDDTaumIVfM5msvdR0k5P4Re6xP9tZSRWYX+jU=",
       "Microsoft.JSInterop.WebAssembly.dll": "sha256-hUxOrW0i2d4N\/3At6wRqsDMpya9fFCtdE6YcQJb8d40=",
-      "MudBlazor.dll": "sha256-UA6YQKjt4bhyuqP5iY4QHEaWEAnNqgbgX7chOO305HM=",
+      "MudBlazor.dll": "sha256-M7DNgn9RNqrSfpreCtMHYeqDd6+3OuyRLhTWe0GUtQ8=",
       "System.Collections.Concurrent.dll": "sha256-59LzOcvlI1LXX8EmmNQF7JmMNoODuOQZdMg78BtXrm8=",
       "System.Collections.dll": "sha256-nXTPErFdfqdi+s4rHVJUJLkE8xoQ82MqfgTYUaJstJM=",
       "System.ComponentModel.Annotations.dll": "sha256-OWzCnzTV9mfRMEUOMhGH\/HDtJWxLaqM6EkWBncWcyQo=",
@@ -39,7 +39,7 @@
       "System.ObjectModel.dll": "sha256-patiS15DNthLBSxwy5DyCbPfhzkNr+l9OgoCGPmBo8w=",
       "System.Private.CoreLib.dll": "sha256-W\/mLPy9OYoFl5Or7FRX3h\/QK2yX3TFe6XlleejsJxZg=",
       "System.Private.Uri.dll": "sha256-JZViNFmgc4i4OyYuOAMRgFG4A\/MKIQ3gAm+jRP2OOX0=",
-      "System.Runtime.dll": "sha256-ZZ3y7DWRBNJanE3SuKbADIxKhUSWIC8V2BllcWwDeAI=",
+      "System.Runtime.dll": "sha256-D+zuuDR+gEOy9xDMBgvMunG45ttdvhThexLqszkh01Q=",
       "System.Runtime.InteropServices.JavaScript.dll": "sha256-gTFfeQGBfRAW8nb7IAJyg7MqT5qqYH0kakuHATgUW5A=",
       "System.Text.Encodings.Web.dll": "sha256-hnmkcWS1u4akDjNnEVBY3N9HGT+VmFajs8yg5AdB2mo=",
       "System.Text.Json.dll": "sha256-Vp7sHgmxNTouMjmyQlN7SEvCXGMmYPEN3PCzuBa5Fe8=",
