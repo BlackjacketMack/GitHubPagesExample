@@ -4,12 +4,25 @@
 
 Blog permalink
 
-<div>
-    Recent Posts
-</div>
+
+@if(_blogArticle != null)
+{
+    <DynamicComponent Type="@_blogArticle.GetType()" />
+
+}
 
 @code
 {
+    private BlogArticle _blogArticle;
+
     [Parameter]
     public string PermaLink{ get; set; }
+
+    [Inject]
+    private IArticleHelper _articleHelper{ get; set; }
+
+    protected override void OnParametersSet()
+    {
+        _blogArticle = _articleHelper.FindBlogArticle(PermaLink);
+    }
 }

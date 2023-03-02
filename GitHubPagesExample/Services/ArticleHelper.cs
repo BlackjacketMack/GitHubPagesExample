@@ -5,15 +5,17 @@ namespace GitHubPagesExample.Services
 {
     interface IArticleHelper
     {
+        BlogArticle? FindBlogArticle(string key) => FindArticle(key) as BlogArticle;
         IEnumerable<BlogArticle> GetBlogArticles() => GetArticles().OfType<BlogArticle>();
         IEnumerable<TechnologyArticle> GetTechnologyArticles() => GetArticles().OfType<TechnologyArticle>();
+        
+        Article? FindArticle(string key);
         IEnumerable<Article> GetRecentArticles();
         IEnumerable<Article> GetArticles();
     }
 
     public class ArticleHelper : IArticleHelper
     {
-
 
 
         public IEnumerable<Article> GetRecentArticles()
@@ -38,6 +40,11 @@ namespace GitHubPagesExample.Services
             }
 
             return posts;
+        }
+
+        public Article? FindArticle(string key)
+        {
+            return GetArticles().Where(w => w.Key == key).SingleOrDefault();
         }
     }
 }

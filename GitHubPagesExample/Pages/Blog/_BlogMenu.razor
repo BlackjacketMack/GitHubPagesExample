@@ -12,7 +12,7 @@
     <MudNavGroup Title="Posts" Expanded="false">
         @foreach(var post in _posts)
         {
-            <MudNavLink Href="@post.Permalink">@post.Name</MudNavLink>
+            <MudNavLink Href="@post.PermaLink">@post.Name</MudNavLink>
         }
     </MudNavGroup>
 </MudNavMenu>
