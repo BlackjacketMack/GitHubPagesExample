@@ -2,8 +2,23 @@
 
 <PageTitle>Technology</PageTitle>
 
-Technology Home
 
-<div>
-    
-</div>
+@{
+    var renderFragments = new List<RenderFragment>();
+    renderFragments.Add(@<TechnologyInfo Name="Dapper" Image="/img/dapper-icon.png"  />);
+    renderFragments.Add(@<TechnologyInfo Name="FluentValidation" />);
+    renderFragments.Add(@<TechnologyInfo Name="MudBlazor" />);
+}
+<MudGrid xs="12" sm="6">
+    @foreach (var renderFragment in renderFragments)
+    {
+    <MudItem xs="12" sm="6" md="4">
+        @renderFragment
+    </MudItem>
+    }
+</MudGrid>
+
+@code{
+
+   
+}
