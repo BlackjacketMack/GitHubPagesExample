@@ -1,0 +1,14 @@
+﻿@page "/blog/{PermaLink}"
+
+<PageTitle>Blog Home</PageTitle>
+
+Blog permalink
+
+<div>
+    Recent Posts
+</div>
+
+@code{
+    [Parameter]
+    public string PermaLink{ get; set; }
+}
