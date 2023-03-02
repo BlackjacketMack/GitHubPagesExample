@@ -12,9 +12,8 @@
 </MudGrid>
 
 @code{
-
     [Inject]
-    private IArticleHelper _articleHelper{ get; set; }
+    private IArticleHelper? _articleHelper { get; set; } = default!;
 
     private IEnumerable<TechnologyArticle> _technologyArticles = Enumerable.Empty<TechnologyArticle>();
 

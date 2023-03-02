@@ -1,5 +1,4 @@
 ﻿@page "/blog/recent"
-@using GitHubPagesExample.Pages.Blog.Posts;
 @using GitHubPagesExample.Services;
 
 <PageTitle>Recent Posts</PageTitle>
@@ -20,7 +19,7 @@ Blog home
 @code 
 {
     [Inject]
-    private IArticleHelper _articleHelper{ get; set; }
+    private IArticleHelper _articleHelper { get; set; } = default!;
 
     private IEnumerable<Article> _blogPostPages = Enumerable.Empty<Article>();
 

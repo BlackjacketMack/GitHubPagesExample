@@ -1,5 +1,4 @@
 ﻿using GitHubPagesExample.Pages;
-using GitHubPagesExample.Pages.Blog.Posts;
 
 namespace GitHubPagesExample.Services
 {
