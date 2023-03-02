@@ -14,36 +14,41 @@
         <MudSpacer />
         <MudButton StartIcon="@Icons.Material.Filled.Code" Class="ml-0 ml-sm-8" Color="Color.Inherit" Href="code"><div class="d-none d-sm-flex">Code</div></MudButton>
         <MudButton StartIcon="@Icons.Material.Filled.Feed" Class="ml-0 ml-sm-8" Color="Color.Inherit" Href="blog"><div class="d-none d-sm-flex">Blog</div></MudButton>
-        <MudMenu>
-            <ActivatorContent>
-                <MudButton StartIcon="@Icons.Material.Filled.Settings" Class="ml-0 ml-sm-8" Color="Color.Inherit"><div class="d-none d-sm-flex">Also...</div></MudButton>
-            </ActivatorContent>
-            <ChildContent>
-                <MudMenuItem>
-                    <MudLink Href="also/theme">Theme</MudLink>
-                </MudMenuItem>
-                <MudMenuItem>
-                    <MudLink Href="also/fetchdata">Fetch Data</MudLink>
-                </MudMenuItem>
-                <MudMenuItem>
-                    <MudLink Href="also/counter">Counter</MudLink>
-                </MudMenuItem>
-                <MudMenuItem>
-                    <MudLink Href="also/attributions">Attributions</MudLink>
-                </MudMenuItem>
-            </ChildContent>
-        </MudMenu>
+        <MudButton StartIcon="@Icons.Material.Filled.Person" Class="ml-0 ml-sm-8" Color="Color.Inherit" Href="about"><div class="d-none d-sm-flex">About</div></MudButton>
     </MudAppBar>
     <MudMainContent>
-        <MudContainer Class="mt-8" MaxWidth="MaxWidth.Large">
+        <MudContainer Class="mt-8 d-flex flex-column" style="min-height: 90vh;" MaxWidth="MaxWidth.Large">
             @Body
+            <footer class="mt-auto">
+                <MudDivider Class="mb-4" />
+                @foreach(var footerLink in _footerLinks)
+                {
+                    <MudLink Href="@footerLink.Href" Typo="@Typo.body2" Class="mr-4">@footerLink.Name</MudLink>
+                }
+            </footer>
         </MudContainer>
     </MudMainContent>
 </MudLayout>
 
 
+
+
+
 @code {
     private MudTheme _theme = new();
+
+    private class Link
+    {
+        public string Name { get; set; } = default!;
+        public string Href { get; set; } = default!;
+    }
+
+    private IEnumerable<Link> _footerLinks = new[]
+    {
+        new Link{Name = "About",Href = "about"},
+        new Link{Name = "Attributions",Href = "attributions"},
+        new Link{Name = "Theme",Href = "theme"},
+    };
 
     protected override void OnInitialized()
     {
