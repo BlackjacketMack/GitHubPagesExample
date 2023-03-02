@@ -1,7 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject AppState _appState;
 @implements IDisposable;
-@inject NavigationManager _navigationManager
 
 <MudThemeProvider @bind-IsDarkMode="_appState.IsDarkMode" Theme="_theme" />
 <MudDialogProvider/>
@@ -13,11 +12,11 @@
             <MudText Class="ml-3 logo-text">Rithm</MudText>
         </MudLink>
         <MudSpacer />
-        <MudButton StartIcon="@Icons.Material.Filled.Code" Class="ml-8" Color="Color.Inherit" OnClick="@(()=>navigateTo("code"))"><div class="d-none d-sm-flex">Code</div></MudButton>
-        <MudButton StartIcon="@Icons.Material.Filled.Feed" Class="ml-8" Color="Color.Inherit" OnClick="@(()=>navigateTo("blog"))"><div class="d-none d-sm-flex">Blog</div></MudButton>
+        <MudButton StartIcon="@Icons.Material.Filled.Code" Class="ml-0 ml-sm-8" Color="Color.Inherit" Href="code"><div class="d-none d-sm-flex">Code</div></MudButton>
+        <MudButton StartIcon="@Icons.Material.Filled.Feed" Class="ml-0 ml-sm-8" Color="Color.Inherit" Href="blog"><div class="d-none d-sm-flex">Blog</div></MudButton>
         <MudMenu>
             <ActivatorContent>
-                <MudButton StartIcon="@Icons.Material.Filled.Settings" Class="ml-8" Color="Color.Inherit"><div class="d-none d-sm-flex">Also...</div></MudButton>
+                <MudButton StartIcon="@Icons.Material.Filled.Settings" Class="ml-0 ml-sm-8" Color="Color.Inherit"><div class="d-none d-sm-flex">Also...</div></MudButton>
             </ActivatorContent>
             <ChildContent>
                 <MudMenuItem>
@@ -86,6 +85,4 @@
     {
 
     }
-
-    private void navigateTo(string url) => _navigationManager.NavigateTo(url);
 }
