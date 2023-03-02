@@ -1,0 +1,52 @@
+﻿@inject HttpClient Http
+
+<table class="table table-condensed table-striped">
+    <tr>
+        <td>Wins</td>
+        <td>@Wins</td>
+        <td>@WinPercentage</td>
+    </tr>
+    <tr>
+        <td>Losses</td>
+        <td>@Losses</td>
+        <td>@LossPercentage</td>
+    </tr>
+</table>
+              
+@code{
+    [Parameter]
+    public IList<MontyHallRound> Rounds { get; set; }
+
+    [Parameter]
+    public MontyHallState State { get; set; }
+
+    public int RoundCount => Rounds.Count();
+
+    public int Wins { get; set; }
+    public string WinPercentage { get; set; }
+    public int Losses { get; set; }
+    public string LossPercentage { get; set; }
+
+    //public int Wins => Rounds.Count(s => s.Step == MontyHall.RoundSteps.Finished && s.IsWin);
+    //public int Losses => Rounds.Count(s => s.Step == MontyHall.RoundSteps.Finished && !s.IsWin);
+
+    private string percentage(int num)
+    {
+        var pct = (decimal)num / RoundCount;
+
+        return pct.ToString("p0");
+    }
+
+    protected override void OnInitialized()
+    {
+        State.OnRoundChange += refreshResults;
+    }
+
+    private void refreshResults()
+    {
+        Wins = Rounds.Count(s => s.Step == MontyHallSteps.Finished && s.IsWin);
+        WinPercentage = percentage(Wins);
+        Losses = RoundCount - Wins;
+        LossPercentage = percentage(Losses);
+    }
+}

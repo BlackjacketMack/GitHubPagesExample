@@ -1,0 +1,186 @@
+﻿@page "/code/samples/monty-hall"
+@inject HttpClient Http
+
+@{
+    RenderFragment formatDoorNumber(int doorNumber) =>
+            @<div>
+                @if (doorNumber != default)
+                    {
+                        <div>
+                            Door #@doorNumber
+                        </div>
+                    }
+            </div>;
+}
+
+<div>
+    <h3>Monty Hall</h3>
+    <div class="alert alert-info">
+        Concepts here include: child components, state management, cascading parameters, component parameters, cancellation tokens, form field events and more.
+    </div>
+    <MudGrid>
+        <MudItem xs="6">
+            <div class="form-group">
+                <label>Strategy</label>
+                <div>
+                    <label><input name="strategyOption" type="radio" value="@MontyHallStrategies.Stay" checked="@(Strategy == MontyHallStrategies.Stay)" @onchange="Strategy_Changed"/> Stay</label>
+                    <label><input name="strategyOption" type="radio" value="@MontyHallStrategies.Switch" checked="@(Strategy == MontyHallStrategies.Switch)" @onchange="Strategy_Changed" /> Switch</label>
+                </div>
+            </div>
+
+            <MudGrid>
+                <MudItem xs="6">
+                    <label>Iterations</label>
+                    <input type="number" class="form-control" @bind-value="Iterations"/>
+                </MudItem>
+                <MudItem xs="6">
+                    <label>Speed (per second)</label>
+                    <input type="number" class="form-control" @bind-value="Speed" />
+                </MudItem>
+            </MudGrid>
+            
+            <MudGrid>
+                <MudItem xs="6">
+                    <MudButton Color="@Color.Primary" OnClick="Begin_Click">BEGIN</MudButton>
+                </MudItem>
+                <MudItem xs="6">
+                    @if (Rounds.Any())
+                    {
+                        <MontyHallResults Rounds="Rounds" State="State" />
+                    }
+                </MudItem>
+            </MudGrid>
+
+        </MudItem>
+
+        <MudItem xs="6">
+             <MudGrid>
+                <MudItem xs="4"><MontyHallDoor DoorNumber="1" State="State" /></MudItem>
+                <MudItem xs="4"><MontyHallDoor DoorNumber="2" State="State" /></MudItem>
+                <MudItem xs="4"><MontyHallDoor DoorNumber="3" State="State" /></MudItem>
+            </MudGrid>
+        </MudItem>
+    </MudGrid>
+
+    <div class="row">
+        <div class="col">
+            Results
+            <MudSimpleTable>
+                <thead>
+                    <tr>
+                        <th>Round #</th>
+                        <th>Your Door</th>
+                        <th>Host Door</th>
+                        <th>Stay/Switch</th>
+                        <th>Prize Door</th>
+                        <th>Win/Loss</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var round in Rounds)
+                    {
+                        <tr @onclick="()=>OnCell_Clicked(round)">
+                            <td>@round.Number</td>
+                            <td>@formatDoorNumber(round.YourDoor)</td>
+                            <td>@formatDoorNumber(round.HostDoor)</td>
+                            <td>
+                                @if(round.Step >= MontyHallSteps.AltChoice)
+                                {
+                                    <span>
+                                        @(round.Strategy == MontyHallStrategies.Stay ? "Stay on " : "Switch to ")
+                                        @formatDoorNumber(round.StrategyDoor)
+                                    </span>
+                                }
+                            </td>
+                            <td>@formatDoorNumber(round.PrizeDoor)</td>
+                            <td>
+                                @if(round.Step == MontyHallSteps.Finished)
+                                {
+                                    if (round.IsWin)
+                                    {
+                                        <div class="badge badge-success">Win</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="badge">Loss</div>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </MudSimpleTable>
+        </div>
+    </div>
+</div>
+
+@code{
+    private CancellationTokenSource _cancellationTokenSource;
+
+    public MontyHallStrategies Strategy { get; set; } = MontyHallStrategies.Stay;
+
+    public int Iterations { get; set; } = 10;
+    public int Speed { get; set; } = 1;
+
+    public IList<MontyHallRound> Rounds { get; set; } = new List<MontyHallRound>();
+
+    public MontyHallState State = new MontyHallState();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.CompletedTask;
+    }
+
+    public void OnCell_Clicked(MontyHallRound round)
+    {
+        State.NotifyStepChanged(round, MontyHallSteps.Finished);
+    }
+
+    public void Strategy_Changed(ChangeEventArgs args)
+    {
+        Strategy = Enum.Parse<MontyHallStrategies>(args.Value.ToString());
+    }
+
+    public async Task Begin_Click()
+    {
+        if (_cancellationTokenSource != null)
+            _cancellationTokenSource.Cancel();
+
+        _cancellationTokenSource = new CancellationTokenSource();
+        var token = _cancellationTokenSource.Token;
+
+        await processRoundAsync(token);
+    }
+
+    private async Task processRoundAsync(CancellationToken token)
+    {
+        Rounds.Clear();
+        var roundSpeed = 1000 / Speed;
+        var stepSpeed = roundSpeed / 4;
+        var strategy = Strategy;
+
+        for (var i = 1; i <= Iterations; i++)
+        {
+            var round = new MontyHallRound(i, strategy);
+            Rounds.Add(round);
+
+            foreach (var step in Enum.GetValues<MontyHallSteps>())
+            {
+                await refreshAndWait(stepSpeed, token);
+
+                round.ProcessStep(step);
+
+                State.NotifyStepChanged(round, step);
+            }
+
+            State.NotifyRoundChanged();
+            await refreshAndWait(roundSpeed, token);
+        }
+    }
+
+    private async Task refreshAndWait(int ms, CancellationToken cancellationToken)
+    {
+        StateHasChanged();
+        await Task.Delay(ms, cancellationToken);
+    }
+                                        }

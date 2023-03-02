@@ -1,0 +1,100 @@
+﻿
+<div>
+    <div>Door #@DoorNumber</div>
+    <div>
+        @if(IsPrize){
+        <span>(prize)</span>
+        }
+        else{
+        <span>&nbsp;</span>
+        }
+    </div>
+    <div>
+        @if (IsOpen)
+        {
+            <MudIcon Icon="@Icons.Material.Outlined.DoorFront" Size="@Size.Large" />
+        }
+        else if(IsOpenPrize)
+        {
+            <MudBadge Content="@("prize")" Overlap="true" Class="mx-6 my-4">
+                <MudIcon Icon="@Icons.Material.Outlined.DoorFront" Size="@Size.Large" />
+            </MudBadge>
+
+        }
+        else
+        {
+            <MudIcon Icon="@Icons.Material.Filled.DoorFront" Size="@Size.Large" />
+
+        }
+    </div>
+    <div>
+        @if (IsYourDoor)
+        {
+            <text>Yours</text>
+        }
+        else
+        {
+            <text>&nbsp;</text>
+        }
+    </div>
+    <div>
+        @if (IsHostDoor)
+        {
+            <text>Host's</text>
+        }
+        else
+        {
+            <text>&nbsp;</text>
+        }
+    </div>
+     <div>
+        @if (IsStrategyDoor)
+        {
+            <text>@Strategy</text>
+        }
+        else
+        {
+            <text>&nbsp;</text>
+        }
+    </div>
+</div>
+
+        @code{
+    [Parameter]
+    public int DoorNumber { get; set; }
+
+    [Parameter]
+    public MontyHallState State { get; set; }
+
+    public bool IsPrize { get; set; }
+    public bool IsYourDoor { get; set; }
+    public bool IsHostDoor { get; set; }
+    public bool IsStrategyDoor { get; set; }
+    public MontyHallStrategies Strategy { get; set; }
+    public bool IsOpen { get; set; }
+    public bool IsOpenPrize { get; set; }
+
+    protected override void OnInitialized()
+    {
+        State.OnStepChange += processStep;
+    }
+
+    private void processStep(MontyHallRound round, MontyHallSteps step)
+    {
+        IsPrize = round.PrizeDoor == DoorNumber;
+        IsYourDoor = round.YourDoor == DoorNumber;
+        IsHostDoor = round.HostDoor == DoorNumber;
+        IsStrategyDoor = round.StrategyDoor == DoorNumber;
+        Strategy = round.Strategy;
+
+        IsOpen = false;
+        IsOpenPrize = false;
+
+        //host door
+        if (step >= MontyHallSteps.HostChoice && IsHostDoor)
+            IsOpen = true;
+
+        if (step == MontyHallSteps.Finished && IsPrize)
+            IsOpenPrize = true;
+    }
+        }
