@@ -1,4 +1,4 @@
-﻿@page "/also/counter"
+﻿@page "/code/samples/counter"
 
 <PageTitle>Counter</PageTitle>
 
@@ -6,7 +6,7 @@
 
 <p role="status">Current count: @currentCount</p>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<MudButton Color="@Color.Default" Variant="@Variant.Filled" OnClick="IncrementCount">Click me</MudButton>
 
 @code {
     private int currentCount = 0;
