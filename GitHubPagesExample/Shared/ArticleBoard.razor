@@ -1,0 +1,20 @@
+﻿
+<MudGrid xs="12" sm="6">
+    @foreach (var article in Articles)
+    {
+        <MudItem xs="12" sm="6" md="4">
+            <ArticleCard Article="@article"  />
+        </MudItem>
+    }
+</MudGrid>
+
+@code
+{
+    [Parameter]
+    public IEnumerable<Article> Articles{ get; set; } = Enumerable.Empty<Article>();
+
+    protected override void OnInitialized()
+    {
+       
+    }
+}

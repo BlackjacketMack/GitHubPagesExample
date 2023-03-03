@@ -2,7 +2,9 @@
 
 namespace GitHubPagesExample.Pages
 {
-    public abstract class TechnologyArticle : Article
+    public abstract class TechnologyArticle : Article, 
+                                            IArticleIcon, 
+                                            IArticleImage
     {
        public string? Image { get; set; }
        public string? Icon { get; set; }

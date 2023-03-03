@@ -4,10 +4,7 @@
 
 <h1>Resources</h1>
 
-@foreach(var article in _articles)
-{
-    <div>@article.Name</div>
-}
+<ArticleBoard Articles="@_articles" />
 
 @code {
     [Inject]

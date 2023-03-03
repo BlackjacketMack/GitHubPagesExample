@@ -16,8 +16,7 @@
         </CardHeaderActions>
     </MudCardHeader>
     <MudCardContent>
-        <MudText>This day everything happend.</MudText>
-        <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>
+        <MudText>@Article.Description</MudText>
         @foreach(var tag in _tags)
         {
             <MudChip Label=true Size="Size.Small" Class="mx-0 mr-2" Variant="Variant.Text">@tag</MudChip>
@@ -31,7 +30,7 @@
 @code
 {
     [Parameter]
-    public TechnologyArticle Article{ get; set; } = default!;
+    public Article Article{ get; set; } = default!;
 
     private string? _name;
     private string? _image;
@@ -41,11 +40,13 @@
     protected override void OnInitialized()
     {
         _name = Article.Name;
-        _image = Article.Image;
-        _icon = Article.Icon;
         _tags = Article.Tags;
 
-        if (_image == null && _icon == null)
-            _icon = Icons.Custom.Brands.GitHub;
+        if(Article is IArticleImage asArticleImage)
+            _image = asArticleImage.Image;
+
+        if(Article is IArticleIcon asArticleIcon)
+            _icon = asArticleIcon.Icon;
+
     }
 }
