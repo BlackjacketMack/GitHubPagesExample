@@ -25,6 +25,6 @@ Blog home
 
     protected override void OnInitialized()
     {
-        _blogPostPages = _articleHelper.GetRecentArticles();
+        _blogPostPages = _articleHelper.GetArticles<BlogArticle>().Where(w => w.PostDate > DateTime.UtcNow.AddMonths(-3));
     }
 }

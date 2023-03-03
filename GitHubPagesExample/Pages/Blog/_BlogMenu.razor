@@ -26,6 +26,6 @@
 
     protected override void OnInitialized()
     {
-        _posts = _articleHelper.GetBlogArticles();
+        _posts = _articleHelper.GetArticles<BlogArticle>();
     }
 }

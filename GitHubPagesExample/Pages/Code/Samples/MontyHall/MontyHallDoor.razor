@@ -59,12 +59,12 @@
     </div>
 </div>
 
-        @code{
+@code{
     [Parameter]
     public int DoorNumber { get; set; }
 
     [Parameter]
-    public MontyHallState State { get; set; }
+    public MontyHallState State { get; set; } = default!;
 
     public bool IsPrize { get; set; }
     public bool IsYourDoor { get; set; }

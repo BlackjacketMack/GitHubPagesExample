@@ -4,24 +4,15 @@ namespace GitHubPagesExample.Services
 {
     interface IArticleHelper
     {
-        BlogArticle? FindBlogArticle(string key) => FindArticle(key) as BlogArticle;
-        IEnumerable<BlogArticle> GetBlogArticles() => GetArticles().OfType<BlogArticle>();
-        IEnumerable<TechnologyArticle> GetTechnologyArticles() => GetArticles().OfType<TechnologyArticle>();
-        
+        T? FindArticle<T>(string key) where T : Article => FindArticle(key) as T;
+        IEnumerable<T> GetArticles<T>() where T : Article => GetArticles().OfType<T>();
+
         Article? FindArticle(string key);
-        IEnumerable<Article> GetRecentArticles();
         IEnumerable<Article> GetArticles();
     }
 
     public class ArticleHelper : IArticleHelper
     {
-
-
-        public IEnumerable<Article> GetRecentArticles()
-        {
-            return GetArticles();
-        }
-
         public IEnumerable<Article> GetArticles()
         {
             var posts = new List<Article>();

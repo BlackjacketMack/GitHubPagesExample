@@ -19,7 +19,7 @@
 
     protected override void OnInitialized()
     {
-        _technologyArticles = _articleHelper.GetTechnologyArticles();
+        _technologyArticles = _articleHelper.GetArticles<TechnologyArticle>();
     }
 
 }

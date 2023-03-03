@@ -23,6 +23,6 @@ Blog permalink
 
     protected override void OnParametersSet()
     {
-        _blogArticle = _articleHelper.FindBlogArticle(PermaLink);
+        _blogArticle = _articleHelper.FindArticle<BlogArticle>(PermaLink);
     }
 }

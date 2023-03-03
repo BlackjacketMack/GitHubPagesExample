@@ -1,0 +1,22 @@
+﻿@page "/resources"
+
+<PageTitle>Resources</PageTitle>
+
+<h1>Resources</h1>
+
+@foreach(var article in _articles)
+{
+    <div>@article.Name</div>
+}
+
+@code {
+    [Inject]
+    private IArticleHelper _articleHelper { get; set; } = default!;
+
+    private IEnumerable<ResourceArticle> _articles = Enumerable.Empty<ResourceArticle>();
+
+    protected override void OnInitialized()
+    {
+        _articles = _articleHelper.GetArticles<ResourceArticle>();
+    }
+}
