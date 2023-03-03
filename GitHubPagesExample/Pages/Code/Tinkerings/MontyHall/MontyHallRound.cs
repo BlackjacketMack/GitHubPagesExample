@@ -1,4 +1,4 @@
-namespace GitHubPagesExample.Pages.Code.Samples.MontyHall
+namespace GitHubPagesExample.Pages.Code.Tinkerings.MontyHall
 {
     public class MontyHallRound
     {
