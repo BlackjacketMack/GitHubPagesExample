@@ -30,10 +30,6 @@
     </MudMainContent>
 </MudLayout>
 
-
-
-
-
 @code {
     private MudTheme _theme = new();
 
@@ -52,10 +48,7 @@
     protected override void OnInitialized()
     {
         _appState.StateChanged += StateChanged;
-
-        var primary = new MudBlazor.Utilities.MudColor("#607D8B");
-        var secondary = new MudBlazor.Utilities.MudColor("#F44336");
-        var tertiary = new MudBlazor.Utilities.MudColor("#009688");
+        
         _theme = new MudTheme
             {
                 Typography = new Typography
@@ -67,15 +60,15 @@
                 },
                 Palette = new Palette
                 {
-                    Primary = primary,
-                    Secondary = secondary,
-                    Tertiary = tertiary
+                    Primary = new MudColor("#607D8B"),
+                    Secondary = new MudColor("#8b6e60"),
+                    Tertiary = new MudColor("#60678b")
                 },
                 PaletteDark = new PaletteDark
                 {
-                    Primary = primary,
-                    Secondary = secondary,
-                    Tertiary = tertiary
+                    Primary = new MudColor("#78909c"),
+                    Secondary = new MudColor("#9c8478"),
+                    Tertiary = new MudColor("#787e9c")
                 }
             };
     }
@@ -87,6 +80,6 @@
 
     public void Dispose()
     {
-
+        _appState.StateChanged -= StateChanged;
     }
 }
