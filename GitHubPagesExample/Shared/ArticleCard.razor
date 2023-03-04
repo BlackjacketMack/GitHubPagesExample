@@ -17,10 +17,7 @@
     </MudCardHeader>
     <MudCardContent>
         <MudText>@Article.Description</MudText>
-        @foreach(var tag in _tags)
-        {
-            <MudChip Label=true Size="Size.Small" Class="mx-0 mr-2" Variant="Variant.Text">@tag</MudChip>
-        }
+        <ArticleTags Tags="@Article.Tags" />
     </MudCardContent>
     <MudCardActions>
         <MudButton Variant="Variant.Text" Color="Color.Primary">Read More</MudButton>

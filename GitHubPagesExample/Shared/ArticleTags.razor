@@ -1,0 +1,15 @@
+﻿@foreach (var tag in Tags)
+{
+    <MudChip Label=true Size="Size.Small" Class="mx-0 mr-2" Variant="Variant.Text">@tag</MudChip>
+}
+
+@code
+{
+    [Parameter]
+    public IEnumerable<string> Tags { get; set; } = Enumerable.Empty<string>();
+
+    protected override void OnInitialized()
+    {
+
+    }
+}

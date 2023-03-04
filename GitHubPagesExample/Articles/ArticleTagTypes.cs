@@ -1,6 +1,6 @@
 ﻿namespace GitHubPagesExample
 {
-    public class ArticleTags
+    public class ArticleTagTypes
     {
         public const string ATTRIBUTION = "attribution";
 

@@ -4,7 +4,30 @@
 
 <h1>Resources</h1>
 
-<ArticleBoard Articles="@_articles" />
+
+@foreach(var article in _articles)
+{
+    <MudGrid>
+        <MudItem xs="12" sm="10">
+            <MudText Typo="@Typo.h6">@article.Name</MudText>
+            <MudText Typo="@Typo.body1">@article.Description</MudText>
+            <div>
+                @if(article.Url != null)
+                {
+                <MudLink Href="@article.Url" Typo="@Typo.caption">@article.Url</MudLink>
+                }
+            </div>
+        </MudItem>
+        <MudItem xs="12" sm="2">
+            <ArticleTags Tags="@article.Tags" />
+        </MudItem>
+    </MudGrid>
+    
+    @if(article != _articles.Last())
+    {
+        <MudDivider Class="my-8"/>
+    }
+}
 
 @code {
     [Inject]

@@ -1,0 +1,27 @@
+﻿
+<MudSimpleTable>
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var article in Articles)
+        {
+            <tr>
+                <td>@article.Name</td>  
+            </tr>
+        }
+    </tbody>
+</MudSimpleTable>
+    
+@code
+{
+    [Parameter]
+    public IEnumerable<Article> Articles { get; set; } = Enumerable.Empty<Article>();
+
+    protected override void OnInitialized()
+    {
+
+    }
+}
